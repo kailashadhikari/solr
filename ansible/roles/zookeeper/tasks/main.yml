@@ -1,0 +1,50 @@
+- name: Package is downloaded
+  get_url:
+    url: http://apache.rediris.es/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+    dest: /opt/zookeeper-3.4.6.tar.gz
+  tags: [zookeeper]
+
+- name: Package is uncompressed
+  unarchive:
+    src: /opt/zookeeper-3.4.6.tar.gz
+    dest: /opt
+    copy: no
+  tags: [zookeeper]
+
+- name: Links are present
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  with_items: links
+  tags: [zookeeper]
+
+- name: Directories are present
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: directories
+  tags: [zookeeper]
+
+- name: Files are present
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items: files
+  tags: [zookeeper]
+
+- name: Templates are present
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items: templates
+  tags: [zookeeper]
+
+- name: Service is started
+  service:
+    name: zookeeper
+    state: started
+    pattern: zookeeper
+  tags: [zookeeper]

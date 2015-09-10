@@ -1,0 +1,43 @@
+- name: Package is downloaded
+  get_url:
+    url: http://archive.apache.org/dist/lucene/solr/5.2.1/solr-5.2.1.tgz
+    dest: /opt/solr-5.2.1.tgz
+  tags: [solr]
+
+- name: Package is uncompressed
+  unarchive:
+    src: /opt/solr-5.2.1.tgz
+    dest: /opt
+    copy: no
+    creates: /opt/solr-5.2.1
+  tags: [solr]
+
+- name: Files are present
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items: files
+  tags: [solr]
+
+- name: Links are present
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  with_items: links
+  tags: [solr]
+
+- name: Template is present
+  template:
+    src: solr.in.sh
+    dest: /opt/solr/bin/solr.in.sh
+    mode: 0755
+  tags: [solr]
+
+- name: Service is started
+  service:
+    name: solr
+    state: started
+    pattern: solr
+  tags: [zookeeper]

@@ -1,0 +1,17 @@
+directories:
+  - /var/zookeeper
+  - /var/zookeeper/log
+  - /var/zookeeper/data
+
+links: [
+  { src: "/opt/zookeeper-3.4.6", dest: "/opt/zookeeper" }
+]
+
+files: [
+  {src: "zkinit.sh", dest: "/etc/init.d/zookeeper", mode: "0755" }
+]
+
+templates: [
+  {src: "zoo.cfg", dest: "/opt/zookeeper/conf/zoo.cfg", mode: "0644" },
+  {src: "myid", dest: "/var/zookeeper/data/myid", mode: "0644" }
+]

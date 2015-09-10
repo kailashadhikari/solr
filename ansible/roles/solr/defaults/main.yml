@@ -1,0 +1,7 @@
+links: [
+  { src: "/opt/solr-5.2.1", dest: "/opt/solr" }
+]
+
+files: [
+  { src: "solrinit.sh", dest: "/etc/init.d/solr", mode: "0755" }
+]
