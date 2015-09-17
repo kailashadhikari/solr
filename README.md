@@ -40,6 +40,4 @@ sudo /opt/solr/bin/solr -e techproducts
 TODO
 ====
 
-* Start Zookeeper
-* Start solr
 * Move ports opening to Ansible
