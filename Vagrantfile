@@ -14,7 +14,6 @@ Vagrant.configure(2) do |config|
       end
       d.vm.provision "ansible" do |ansible|
         ansible.playbook = "ansible/solr.yml"
-        # ansible.verbose = "vvvv"
       end
     end
   end

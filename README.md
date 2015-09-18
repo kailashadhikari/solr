@@ -41,3 +41,11 @@ TODO
 ====
 
 * Move ports opening to Ansible
+
+Proxy
+=====
+
+```bash
+export http_proxy=http://10.110.8.42:8080
+git config --global http.proxy $http_proxy
+```
