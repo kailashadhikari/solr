@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
       d.vm.provider "virtualbox" do |v|
         v.memory = 1024
       end
+      d.vm.provision "shell", path: "bootstrap.sh"
       d.vm.provision "ansible" do |ansible|
         ansible.playbook = "ansible/solr.yml"
       end
