@@ -20,7 +20,9 @@ GC_TUNE="-XX:NewRatio=3 \
 -XX:+CMSParallelRemarkEnabled \
 -XX:+ParallelRefProcEnabled"
 
-# ZK_HOST="{% for item in zk_servers %}{{ item }}:2181{% if not loop.last %},{% endif %}{% endfor %}"
+ZK_HOST="{% for item in zk_servers %}{{ item }}:2181{% if not loop.last %},{% endif %}{% endfor %}"
+
+SOLR_HOST={{ hostname }}
 
 ENABLE_REMOTE_JMX_OPTS="false"
 

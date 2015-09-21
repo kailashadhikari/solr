@@ -1,8 +1,6 @@
 - hosts: all
   serial: 1
   sudo: yes
-  vars:
-    - firewall_allowed_tcp_ports: "2181"
   roles:
     - java
     - zookeeper
