@@ -1,0 +1,6 @@
+- hosts: mysql
+  serial: 1
+  sudo: yes
+  roles:
+    - docker
+    - mysql

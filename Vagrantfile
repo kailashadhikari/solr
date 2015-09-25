@@ -3,7 +3,8 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "puppetlabs/centos-6.6-64-puppet"
+#  config.vm.box = "puppetlabs/centos-6.6-64-puppet"
+  config.vm.box = "centos/7"
 
   (1..3).each do |i|
     config.vm.define "solr-#{i}" do |d|
@@ -17,6 +18,10 @@ Vagrant.configure(2) do |config|
         ansible.playbook = "ansible/solr.yml"
       end
     end
+  end
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+      config.cache.scope = :box
   end
 
 end

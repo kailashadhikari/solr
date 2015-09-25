@@ -7,18 +7,19 @@ Requirements
 
 ```bash
 vagrant plugin install vagrant-proxyconf
+vagrant plugin install vagrant-cachier
 ```
 
 Set Up
 ======
 
 ```bash
-export http_proxy=http://10.110.8.42:8080
-export https_proxy=http://10.110.8.42:8080
-export VAGRANT_HTTP_PROXY="$http_proxy"
-export VAGRANT_HTTPS_PROXY="$https_proxy"
+export HTTP_PROXY=http://10.110.8.42:8080
+export HTTPS_PROXY=http://10.110.8.42:8080
+export VAGRANT_HTTP_PROXY="$HTTP_PROXY"
+export VAGRANT_HTTPS_PROXY="$HTTPS_PROXY"
 
-vagrant up
+vagrant up --provision
 ```
 
 Solr
@@ -56,6 +57,17 @@ Git Proxy
 
 ```bash
 git config --global http.proxy $http_proxy
+```
+
+MySql
+=====
+
+```bash
+# Run some command
+docker run -it --rm \
+    --link solr_import_db:mysql \
+    mysql \
+    sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
 ```
 
 Castellano
