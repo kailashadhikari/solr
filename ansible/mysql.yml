@@ -1,6 +1,5 @@
 - hosts: mysql
-  serial: 1
-  sudo: yes
+  remote_user: vagrant
   roles:
     - docker
     - mysql

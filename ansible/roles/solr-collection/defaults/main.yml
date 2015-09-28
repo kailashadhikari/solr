@@ -1,0 +1,19 @@
+conf_dir: /opt/solr/server/solr/configsets/{{ collection }}/conf
+
+directories:
+  - /opt/solr/contrib/dataimporthandler/lib
+  - "{{ conf_dir }}"
+  - /opt/solr/server/solr/configsets/{{ collection }}/conf/lang
+  - /opt/solr/server/solr/configsets/{{ collection }}/data
+
+files: [
+  { src: "lang/stopwords_en.txt", dest: "{{ conf_dir}}/lang/stopwords_en.txt" },
+  { src: "currency.xml", dest: "{{ conf_dir}}/currency.xml" },
+  { src: "protwords.txt", dest: "{{ conf_dir}}/protwords.txt" },
+  { src: "stopwords.txt", dest: "{{ conf_dir}}/stopwords.txt" },
+  { src: "synonyms.txt", dest: "{{ conf_dir}}/synonyms.txt" },
+  { src: "{{ data_config_src }}", dest: "{{ conf_dir}}/data-config.xml" },
+  { src: "schema.xml", dest: "{{ conf_dir}}/schema.xml" },
+  { src: "{{ solr_config_src }}", dest: "{{ conf_dir}}/solrconfig.xml" }
+]
+

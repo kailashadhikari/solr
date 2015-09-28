@@ -1,6 +1,6 @@
-- hosts: all
-  serial: 1
+- hosts: solr
   sudo: yes
+  remote_user: vagrant
   roles:
     - java
     - zookeeper

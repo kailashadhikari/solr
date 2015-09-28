@@ -1,0 +1,22 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource"
+                driver="com.mysql.jdbc.Driver"
+                url="jdbc:mysql://10.110.202.29:3306/employees"
+                user="root"
+                password="my-secret-pw"/>
+    <document>
+        <entity name="employees"
+                pk="id"
+                query="select emp_no as id,birth_date,first_name,last_name,gender,hire_date from employees"
+                deltaImportQuery="SELECT emp_no as id,birth_date,first_name,last_name,gender,hire_date from employees WHERE id='${dih.delta.id}'"
+                deltaQuery="SELECT emp_no as id FROM employees WHERE hire_date > '${dih.last_index_time}'"
+                >
+            <field column="id" name="id"/>
+            <field column="birth_date" name="birth_date"/>
+            <field column="first_name" name="first_name"/>
+            <field column="last_name" name="last_name"/>
+            <field column="gender" name="gender"/>
+            <field column="hire_date" name="hire_date"/>
+        </entity>
+    </document>
+</dataConfig>

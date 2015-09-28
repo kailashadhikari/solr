@@ -1,0 +1,22 @@
+- name: Directories are created
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  with_items: directories
+  tags: [solr-collection]
+
+- name: Files are copied
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: files
+  tags: [solr-collection]
+
+- name: Collection is created
+  shell: sudo /opt/solr/bin/solr create_collection \
+    -c {{ collection }} \
+    -shards {{ shards }} \
+    -replicationFactor {{ replication_factor }} \
+    -d /opt/solr/server/solr/configsets/{{ collection }}/conf
+  tags: [solr-collection]

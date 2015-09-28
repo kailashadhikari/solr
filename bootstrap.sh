@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# sudo yum install -y lokkit
 # Zookeeper
 sudo lokkit --update -p 2181:tcp
 sudo lokkit --update -p 2888:tcp

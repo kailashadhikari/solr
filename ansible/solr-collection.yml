@@ -1,0 +1,32 @@
+- hosts: solr-master
+  sudo: yes
+  remote_user: vagrant
+  vars_prompt:
+    - name: "collection"
+      prompt: "What is the name of the collection?"
+      private: no
+    - name: "shards"
+      prompt: "How many shards would you like to set for this collection?"
+      private: no
+      default: 1
+    - name: "replication_factor"
+      prompt: "What replication factor would you like to set for this collection?"
+      private: no
+      default: 2
+    - name: "data_config_src"
+      prompt: "What is the data-config.xml source location?"
+      private: no
+      default: "data-config.xml"
+    - name: "solr_config_src"
+      prompt: "What is the solrconfig.xml source location?"
+      private: no
+      default: "solrconfig.xml"
+    - name: "schema_src"
+      prompt: "What is the schema.xml source location?"
+      private: no
+      default: "schema.xml"
+  roles:
+    - java
+    - zookeeper
+    - solr
+    - solr-collection
