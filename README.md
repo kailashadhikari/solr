@@ -60,14 +60,20 @@ ln -s /opt/zookeeper-3.4.6 /opt/zookeeper
 sudo mkdir -p /var/zookeeper/{log,data}
 
 # Create the service script
-sudo cp $SOURCE_CODE_DIR/ansible/roles/zookeeper/files/zkinit.sh /etc/init.d/zookeeper
+sudo cp \
+    $SOURCE_CODE_DIR/ansible/roles/zookeeper/files/zkinit.sh \
+    /etc/init.d/zookeeper
 sudo chmod 755 /etc/init.d/zookeeper
 
 # Copy config files
 # Manually modify the file by putting all zookeeper hosts
-sudo cp $SOURCE_CODE_DIR/ansible/roles/zookeeper/templates/zoo.cfg /opt/zookeeper/conf/zoo.cfg
+sudo cp \
+    $SOURCE_CODE_DIR/ansible/roles/zookeeper/templates/zoo.cfg \
+    /opt/zookeeper/conf/zoo.cfg
 # Manually modify the file by putting an incremental ID starting from 1
-sudo cp $SOURCE_CODE_DIR/ansible/roles/zookeeper/templates/myid /var/zookeeper/data/myid
+sudo cp \
+    $SOURCE_CODE_DIR/ansible/roles/zookeeper/templates/myid \
+    /var/zookeeper/data/myid
 
 # Start the service
 sudo service zookeeper start
@@ -92,7 +98,9 @@ cd opt
 tar -xzvf solr-5.2.1.tgz
 
 # Create the service script
-sudo cp $SOURCE_CODE_DIR/ansible/roles/solr/solrinit.sh /etc/init.d/solr
+sudo cp \
+    $SOURCE_CODE_DIR/ansible/roles/solr/solrinit.sh \
+    /etc/init.d/solr
 sudo chmod 755 /etc/init.d/solr
 
 # Create the product link
@@ -101,7 +109,9 @@ ln -s /opt/solr-5.2.1 /opt/solr
 # Copy the configuration executable
 # Manually modify the following file with the Zookeeper information:
 # $SOURCE_CODE_DIR/ansible/roles/solr/templates/solr.in.sh
-sudo cp $SOURCE_CODE_DIR/ansible/roles/solr/templates/solr.in.sh /opt/solr/bin/solr.in.sh
+sudo cp \
+    $SOURCE_CODE_DIR/ansible/roles/solr/templates/solr.in.sh \
+    /opt/solr/bin/solr.in.sh
 
 # Start the service
 sudo service solr start
@@ -135,19 +145,21 @@ REPLICATION_FACTOR=2
 # Directory where this source code is located
 SOURCE_CODE_DIR=/vagrant
 
-# Manually modify the following files with the information about the data source that is to be imported:
-# $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/data-config.xml
-# $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/schema.xml
-# $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/sqlconfig.xml
-
 # Create directories
 sudo mkdir -p /opt/solr/contrib/dataimporthandler/lib
 sudo mkdir -p /opt/solr/server/solr/configsets/$COLLECTION/conf
 sudo mkdir -p /opt/solr/server/solr/configsets/$COLLECTION/conf/lang
 sudo mkdir -p /opt/solr/server/solr/configsets/$COLLECTION/data
 
+# Manually modify the following files with the information about the data source that is to be imported:
+# $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/data-config.xml
+# $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/schema.xml
+# $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/sqlconfig.xml
+
 # Copy configurations
-sudo cp -R $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/* /opt/solr/server/solr/configsets/$COLLECTION
+sudo cp -R \
+    $SOURCE_CODE_DIR/ansible/roles/solr-collection/files/* \
+    /opt/solr/server/solr/configsets/$COLLECTION
 
 # Create collection
 sudo /opt/solr/bin/solr create_collection \
@@ -243,7 +255,8 @@ Import Data
 sudo cp /vagrant/libs/mysql-connector-java-5.1.36-bin.jar .
 
 # Run the Ansible playbook
-ansible-playbook ansible/solr-collection.yml -i ansible/hosts/dev --tags "solr-collection"
+ansible-playbook ansible/solr-collection.yml \
+    -i ansible/hosts/dev
 ```
 
 Pending
