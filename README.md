@@ -18,7 +18,7 @@ Creating development VMs
 
 ```bash
 export http_proxy=http://10.110.8.42:8080
-export https_proxy=http://10.110.8.42:8080
+export https_proxy=https://10.110.8.42:8080
 export VAGRANT_HTTP_PROXY="$http_proxy"
 export VAGRANT_HTTPS_PROXY="$https_proxy"
 
